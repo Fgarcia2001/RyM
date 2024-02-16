@@ -1,1 +1,6 @@
 export const GET_CHARACTER_ID = "GET_CHARACTER_ID";
+export const GET_VALIDATE_LOGIN = "GET_VALIDATE_LOGIN";
+export const SET_LOGIN = "SET_LOGIN";
+export const GET_DETAIL = "GET_DETAIL";
+export const CLEAR_DETAIL = "CLEAR_DETAIL";
+export const GET_FAVORITES = "GET_FAVORITES";

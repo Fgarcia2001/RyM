@@ -7,11 +7,12 @@ const Cards = () => {
 
   return (
     <div>
-      {characters.map((char) => (
-        <Link>
-          <Card name={char.name} image={char.image} gender={char.gender} />
-        </Link>
-      ))}
+      {characters &&
+        characters.map(({ id, name, image }) => (
+          <Link to={`/detail/${id}`} key={id}>
+            <Card key={id} id={id} name={name} image={image} />
+          </Link>
+        ))}
     </div>
   );
 };

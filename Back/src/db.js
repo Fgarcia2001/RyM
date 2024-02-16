@@ -3,10 +3,11 @@ const { Sequelize } = require("sequelize");
 
 const fs = require("fs");
 const path = require("path");
-const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
+const { isUtf8 } = require("buffer");
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 
 const sequelize = new Sequelize(
-  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/drivers`,
+  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
   {
     logging: false,
     native: false,
@@ -34,3 +35,19 @@ let capsEntries = entries.map((entry) => [
   entry[1],
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
+
+const { User, Characters } = sequelize.models;
+
+Characters.belongsToMany(User, {
+  through: "user_character",
+  timestamps: false,
+});
+User.belongsToMany(Characters, {
+  through: "user_character",
+  timestamps: false,
+});
+
+module.exports = {
+  ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
+  conn: sequelize, // para importart la conexión { conn } = require('./db.js');
+};

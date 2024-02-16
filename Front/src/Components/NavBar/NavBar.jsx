@@ -4,8 +4,9 @@ import SearchBar from "../SearchBar/SearchBar";
 const NavBar = () => {
   return (
     <div>
-      <Link>About</Link>
-      <Link>Home</Link>
+      <Link to="/about">About</Link>
+      <Link to="/home">Home</Link>
+      <Link to="/favorites">Favorites</Link>
       <SearchBar />
     </div>
   );
