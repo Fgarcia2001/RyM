@@ -15,7 +15,7 @@ const Detail = () => {
     return () => {
       dispatch(clearDetail());
     };
-  }, []);
+  }, [dispatch]);
   if (!character) return <p>Cargando...</p>;
   return (
     <div>

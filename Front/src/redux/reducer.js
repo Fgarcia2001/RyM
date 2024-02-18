@@ -5,12 +5,17 @@ import {
   GET_DETAIL,
   CLEAR_DETAIL,
   GET_FAVORITES,
+  DELETE_CHARACTER,
+  FAV_HANDLER,
+  SET_GET_FAV,
 } from "./types";
 const initialState = {
   characters: [],
   charactersCopy: [],
   detail: "",
   myFavorites: [],
+  getFavOnly1: false,
+  validate: false,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -29,6 +34,29 @@ const rootReducer = (state = initialState, action) => {
         characters: [...state.characters, payload],
         charactersCopy: [...state.characters, payload],
       };
+    case DELETE_CHARACTER:
+      return {
+        ...state,
+        characters: state.characters.filter((char) => char.id !== payload),
+      };
+    case FAV_HANDLER:
+      if (!payload.fav) {
+        return {
+          ...state,
+          myFavorites: [...state.myFavorites, payload.character],
+        };
+      }
+      return {
+        ...state,
+        myFavorites: state.myFavorites.filter(
+          (fav) => fav.id !== payload.character.id
+        ),
+      };
+    case SET_GET_FAV:
+      return {
+        ...state,
+        getFavOnly1: payload,
+      };
     case GET_DETAIL:
       return {
         ...state,
@@ -45,7 +73,6 @@ const rootReducer = (state = initialState, action) => {
         login: payload,
       };
     case GET_FAVORITES:
-      console.log(payload);
       return {
         ...state,
         myFavorites: payload,

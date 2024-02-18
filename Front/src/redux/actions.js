@@ -1,10 +1,12 @@
 import {
   GET_CHARACTER_ID,
   GET_VALIDATE_LOGIN,
-  SET_LOGIN,
   GET_DETAIL,
   CLEAR_DETAIL,
   GET_FAVORITES,
+  DELETE_CHARACTER,
+  FAV_HANDLER,
+  SET_GET_FAV,
 } from "./types";
 import axios from "axios";
 
@@ -65,14 +67,6 @@ const getLoginValidate = (state) => {
   };
 };
 
-const setLogin = () => {
-  return (dispatch) => {
-    dispatch({
-      type: SET_LOGIN,
-    });
-  };
-};
-
 const signup = (date) => {
   return async () => {
     try {
@@ -102,12 +96,55 @@ const getFavorites = (token) => {
   };
 };
 
+const deleteCharacter = (id) => {
+  return (dispatch) => {
+    dispatch({
+      type: DELETE_CHARACTER,
+      payload: id,
+    });
+  };
+};
+const favoritesHandler = (fav, character) => {
+  return (dispatch) => {
+    dispatch({
+      type: FAV_HANDLER,
+      payload: { fav, character },
+    });
+  };
+};
+
+const setValidateGetFav = (validate) => {
+  return (dispatch) => {
+    dispatch({
+      type: SET_GET_FAV,
+      payload: validate,
+    });
+  };
+};
+const postFav = (objeto, token) => {
+  return async () => {
+    try {
+      await axios.post(`${URL}/favorites`, objeto, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+      return true;
+    } catch (error) {
+      alert("No se pudo guardar cambios");
+    }
+  };
+};
 export {
   getCharacterId,
   getLoginValidate,
-  setLogin,
   getDetail,
   clearDetail,
   signup,
   getFavorites,
+  deleteCharacter,
+  favoritesHandler,
+  setValidateGetFav,
+  postFav,
 };

@@ -1,0 +1,12 @@
+.CartaCharacter {
+  border: 2px solid black;
+  width: 15rem;
+}
+.nameButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.imagenChar {
+  width: 100%;
+}
