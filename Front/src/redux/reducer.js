@@ -8,6 +8,7 @@ import {
   DELETE_CHARACTER,
   FAV_HANDLER,
   SET_GET_FAV,
+  SET_VALIDATE,
 } from "./types";
 const initialState = {
   characters: [],
@@ -55,6 +56,8 @@ const rootReducer = (state = initialState, action) => {
     case SET_GET_FAV:
       return {
         ...state,
+        characters: [],
+        charactersCopy: [],
         getFavOnly1: payload,
       };
     case GET_DETAIL:
@@ -76,6 +79,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         myFavorites: payload,
+      };
+    case SET_VALIDATE:
+      return {
+        ...state,
+        validate: !state.validate,
       };
     case SET_LOGIN:
       return {

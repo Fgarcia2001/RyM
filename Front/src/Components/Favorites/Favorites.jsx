@@ -11,6 +11,7 @@ const Favorites = () => {
   const favorites = useSelector((state) => state.myFavorites);
   if (!favorites) return <div>Cargando</div>;
   useEffect(() => {
+    if (!token) return;
     if (!validate) {
       dispatch(getFavorites(token));
       dispatch(setValidateGetFav(true));

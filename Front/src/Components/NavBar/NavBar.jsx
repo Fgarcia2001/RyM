@@ -1,8 +1,9 @@
 import React from "react";
+import style from "./NavBar.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
-import { postFav } from "../../redux/actions";
+import { postFav, setValidate, setValidateGetFav } from "../../redux/actions";
 const NavBar = () => {
   const token = localStorage.getItem("token");
   const favorites = useSelector((state) => state.myFavorites);
@@ -14,16 +15,22 @@ const NavBar = () => {
   };
   const logout = () => {
     localStorage.removeItem("token");
+    dispatch(setValidate());
+    dispatch(setValidateGetFav(false));
     navigate("/");
   };
   return (
-    <div>
-      <Link to="/about">About</Link>
-      <Link to="/home">Home</Link>
-      <Link to="/favorites">Favorites</Link>
+    <div className={style.navContainer}>
+      <div>
+        <Link to="/about">About</Link>
+        <Link to="/home">Home</Link>
+        <Link to="/favorites">Favorites</Link>
+      </div>
       <SearchBar />
-      <button onClick={guardar}>Guardar cambios</button>
-      <button onClick={logout}>Cerrar sesion</button>
+      <div>
+        <button onClick={guardar}>Guardar cambios</button>
+        <button onClick={logout}>Cerrar sesion</button>
+      </div>
     </div>
   );
 };

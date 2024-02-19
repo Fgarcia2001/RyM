@@ -7,6 +7,7 @@ import {
   DELETE_CHARACTER,
   FAV_HANDLER,
   SET_GET_FAV,
+  SET_VALIDATE,
 } from "./types";
 import axios from "axios";
 
@@ -136,6 +137,13 @@ const postFav = (objeto, token) => {
     }
   };
 };
+const setValidate = () => {
+  return (dispatch) => {
+    dispatch({
+      type: SET_VALIDATE,
+    });
+  };
+};
 export {
   getCharacterId,
   getLoginValidate,
@@ -147,4 +155,5 @@ export {
   favoritesHandler,
   setValidateGetFav,
   postFav,
+  setValidate,
 };

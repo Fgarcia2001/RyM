@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import style from "./SearchBar.module.css";
 import { useState } from "react";
 import { getCharacterId } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,7 +35,7 @@ const SearchBar = () => {
         setFind(false);
       }, 1500);
     }
-    //const response = await dispatch(getCharacterId(id));
+
     document.getElementById("search").value = "";
   };
   useEffect(() => {}, [characters]);
@@ -44,7 +45,7 @@ const SearchBar = () => {
         <input type="number" onChange={handleChange} id="search" />
         <input type="submit" />
         {find ? (
-          <div>
+          <div className={style.mensajeAlerta}>
             <p>Repetido</p>
           </div>
         ) : null}

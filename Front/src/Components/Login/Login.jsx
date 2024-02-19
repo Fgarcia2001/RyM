@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getLoginValidate } from "../../redux/actions";
+import { getLoginValidate, setValidate } from "../../redux/actions";
 import { useNavigate } from "react-router-dom";
 const Login = (props) => {
   const parseJwt = (token) => {
@@ -50,7 +50,10 @@ const Login = (props) => {
     }
   };
   useEffect(() => {
-    isValid && navigate("/home");
+    if (isValid) {
+      dispatch(setValidate());
+      navigate("/home");
+    }
   }, [isValid]);
   return (
     <div>

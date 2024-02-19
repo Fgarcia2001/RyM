@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { signup } from "../../redux/actions";
+import { useNavigate } from "react-router-dom";
 const Signup = (props) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [date, setDate] = useState({
     email: "",
     password: "",
     repPassword: "",
   });
+  const volver = () => {
+    props.state(!props.state);
+  };
   const handleChange = (event) => {
     setDate({
       ...date,
@@ -45,6 +50,7 @@ const Signup = (props) => {
           onChange={handleChange}
         />
         <button type="submit">Create</button>
+        <button onClick={volver}>Volver</button>
       </form>
     </div>
   );
