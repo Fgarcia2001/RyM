@@ -8,6 +8,7 @@ import {
   FAV_HANDLER,
   SET_GET_FAV,
   SET_VALIDATE,
+  ORDER_FAV,
 } from "./types";
 import axios from "axios";
 
@@ -144,6 +145,15 @@ const setValidate = () => {
     });
   };
 };
+const order = (type) => {
+  return (dispatch) => {
+    console.log(type);
+    dispatch({
+      type: ORDER_FAV,
+      payload: type,
+    });
+  };
+};
 export {
   getCharacterId,
   getLoginValidate,
@@ -156,4 +166,5 @@ export {
   setValidateGetFav,
   postFav,
   setValidate,
+  order,
 };

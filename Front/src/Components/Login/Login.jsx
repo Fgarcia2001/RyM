@@ -1,4 +1,5 @@
 import React from "react";
+import style from "./Login.module.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getLoginValidate, setValidate } from "../../redux/actions";
@@ -56,7 +57,7 @@ const Login = (props) => {
     }
   }, [isValid]);
   return (
-    <div>
+    <div className={style.login}>
       <form onSubmit={handleSubmit}>
         <label>EMAIL</label>
         <input

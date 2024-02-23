@@ -1,7 +1,8 @@
 .cardsContainer {
+  margin-top: 8vh;
   display: flex;
+  align-items: start;
   justify-content: center;
-  align-items: center;
-  gap: 2rem;
   flex-wrap: wrap;
+  gap: 2rem;
 }

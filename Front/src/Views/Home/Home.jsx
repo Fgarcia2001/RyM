@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
+import style from "./Home.module.css";
 import Cards from "../../Components/Cards/Cards";
 import { useDispatch, useSelector } from "react-redux";
 import { getFavorites, setValidateGetFav } from "../../redux/actions";
+
 const Home = () => {
   const token = localStorage.getItem("token");
   const validate = useSelector((state) => state.getFavOnly1);
@@ -14,7 +16,7 @@ const Home = () => {
     }
   }, []);
   return (
-    <div>
+    <div className={style.home}>
       <Cards />
     </div>
   );

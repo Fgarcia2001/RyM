@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import style from "./Signup.module.css";
 import { useDispatch } from "react-redux";
 import { signup } from "../../redux/actions";
 import { useNavigate } from "react-router-dom";
@@ -26,7 +27,7 @@ const Signup = (props) => {
   };
   useEffect(() => {}, [date]);
   return (
-    <div>
+    <div className={style.signup}>
       <form type="submit" onSubmit={handleSubmit}>
         <label>Email</label>
         <input

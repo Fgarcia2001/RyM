@@ -20,6 +20,7 @@ const Card = ({ id, name, image, char, gender, origin, status, species }) => {
   }, []);
   return (
     <div className={style.CartaCharacter}>
+      <p>{id}</p>
       <div className={style.nameButton}>
         <h2>{name}</h2>
         {char && <button onClick={close}>X</button>}

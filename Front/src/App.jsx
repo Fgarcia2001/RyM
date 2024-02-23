@@ -5,7 +5,9 @@ import Landing from "./Views/Landing/Landing";
 import Detail from "./Views/Detail/Detail";
 import Favorites from "./Components/Favorites/Favorites";
 import About from "./Components/About/About";
+import Footer from "./Components/Footer/Footer";
 import "./index.css";
+import "./App.css";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 function App() {
@@ -19,7 +21,7 @@ function App() {
     }
   }, []);
   return (
-    <div>
+    <div className="containerApp">
       {location.pathname !== "/" &&
       !location.pathname.startsWith("/detail/") ? (
         <NavBar />
@@ -31,6 +33,7 @@ function App() {
         <Route path="/favorites" element={<Favorites />}></Route>
         <Route path="/about" element={<About />}></Route>
       </Routes>
+      <Footer />
     </div>
   );
 }

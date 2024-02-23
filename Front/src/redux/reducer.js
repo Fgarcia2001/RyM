@@ -9,12 +9,14 @@ import {
   FAV_HANDLER,
   SET_GET_FAV,
   SET_VALIDATE,
+  ORDER_FAV,
 } from "./types";
 const initialState = {
   characters: [],
   charactersCopy: [],
   detail: "",
   myFavorites: [],
+  myFavoritesCopy: [],
   getFavOnly1: false,
   validate: false,
 };
@@ -45,11 +47,15 @@ const rootReducer = (state = initialState, action) => {
         return {
           ...state,
           myFavorites: [...state.myFavorites, payload.character],
+          myFavoritesCopy: [...state.myFavorites, payload.character],
         };
       }
       return {
         ...state,
         myFavorites: state.myFavorites.filter(
+          (fav) => fav.id !== payload.character.id
+        ),
+        myFavoritesCopy: state.myFavorites.filter(
           (fav) => fav.id !== payload.character.id
         ),
       };
@@ -79,7 +85,27 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         myFavorites: payload,
+        myFavoritesCopy: payload,
       };
+    case ORDER_FAV:
+      switch (payload) {
+        case "Ascendente":
+          return {
+            ...state,
+            myFavorites: state.myFavoritesCopy.sort((a, b) => a.id - b.id),
+          };
+        case "Descendente":
+          return {
+            ...state,
+            myFavorites: state.myFavoritesCopy.sort((a, b) => b.id - a.id),
+          };
+        case "":
+          console.log("entre");
+          return {
+            ...state,
+            myFavorites: state.myFavoritesCopy,
+          };
+      }
     case SET_VALIDATE:
       return {
         ...state,

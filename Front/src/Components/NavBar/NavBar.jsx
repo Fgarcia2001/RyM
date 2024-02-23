@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import { postFav, setValidate, setValidateGetFav } from "../../redux/actions";
+
 const NavBar = () => {
   const token = localStorage.getItem("token");
   const favorites = useSelector((state) => state.myFavorites);
@@ -21,7 +22,7 @@ const NavBar = () => {
   };
   return (
     <div className={style.navContainer}>
-      <div>
+      <div className={style.links}>
         <Link to="/about">About</Link>
         <Link to="/home">Home</Link>
         <Link to="/favorites">Favorites</Link>
