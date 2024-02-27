@@ -8,6 +8,9 @@ const Cards = () => {
 
   return (
     <div className={style.cardsContainer}>
+      {characters.length === 0 && (
+        <div>Busque personajes en la barra de busqueda </div>
+      )}
       {characters &&
         characters.map(
           ({ id, name, image, gender, origin, status, species }) => (

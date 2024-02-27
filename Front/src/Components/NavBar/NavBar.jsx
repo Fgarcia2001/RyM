@@ -7,12 +7,17 @@ import { postFav, setValidate, setValidateGetFav } from "../../redux/actions";
 
 const NavBar = () => {
   const token = localStorage.getItem("token");
-  const favorites = useSelector((state) => state.myFavorites);
+  const favorites = useSelector((state) => state.myFavoritesCopy);
+  const favfirst = useSelector((state) => state.favoritesFirst);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const favIdFirst = favfirst.map((fav) => fav.id);
   const favId = favorites.map((fav) => fav.id);
   const guardar = () => {
-    dispatch(postFav({ favId }, token));
+    const trueOrFalse = verificar(favId, favIdFirst);
+    !trueOrFalse
+      ? dispatch(postFav({ favId }, token))
+      : alert("No se modifico los favoritos");
   };
   const logout = () => {
     localStorage.removeItem("token");
@@ -20,6 +25,15 @@ const NavBar = () => {
     dispatch(setValidateGetFav(false));
     navigate("/");
   };
+
+  const verificar = (arr1, arr2) => {
+    if ((Array.isArray(arr1) && Array.isArray(arr2)) === false) return false;
+    return (
+      JSON.stringify([...new Set(arr1.flat().sort())]) ===
+      JSON.stringify([...new Set(arr2.flat().sort())])
+    );
+  };
+
   return (
     <div className={style.navContainer}>
       <div className={style.links}>

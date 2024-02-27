@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { deleteCharacter, favoritesHandler } from "../../redux/actions";
 const Card = ({ id, name, image, char, gender, origin, status, species }) => {
   const character = { id, name, image, char, gender, origin, status, species };
-  const favoritos = useSelector((state) => state.myFavorites);
+  const favoritos = useSelector((state) => state.myFavoritesCopy);
   const [fav, setFav] = useState(false);
   const dispatch = useDispatch();
   const close = () => {

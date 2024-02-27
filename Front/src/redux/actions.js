@@ -9,6 +9,8 @@ import {
   SET_GET_FAV,
   SET_VALIDATE,
   ORDER_FAV,
+  FILTER_GENDER,
+  SET_FIRSTFAV,
 } from "./types";
 import axios from "axios";
 
@@ -124,13 +126,16 @@ const setValidateGetFav = (validate) => {
   };
 };
 const postFav = (objeto, token) => {
-  return async () => {
+  return async (dispatch) => {
     try {
       await axios.post(`${URL}/favorites`, objeto, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
+      });
+      dispatch({
+        type: SET_FIRSTFAV,
       });
       return true;
     } catch (error) {
@@ -147,10 +152,17 @@ const setValidate = () => {
 };
 const order = (type) => {
   return (dispatch) => {
-    console.log(type);
     dispatch({
       type: ORDER_FAV,
       payload: type,
+    });
+  };
+};
+const filterGender = (gender) => {
+  return (dispatch) => {
+    dispatch({
+      type: FILTER_GENDER,
+      payload: gender,
     });
   };
 };
@@ -167,4 +179,5 @@ export {
   postFav,
   setValidate,
   order,
+  filterGender,
 };

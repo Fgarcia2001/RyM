@@ -10,6 +10,8 @@ import {
   SET_GET_FAV,
   SET_VALIDATE,
   ORDER_FAV,
+  FILTER_GENDER,
+  SET_FIRSTFAV,
 } from "./types";
 const initialState = {
   characters: [],
@@ -17,6 +19,9 @@ const initialState = {
   detail: "",
   myFavorites: [],
   myFavoritesCopy: [],
+  favoritesFirst: [],
+  order: 0,
+  filtered: false,
   getFavOnly1: false,
   validate: false,
 };
@@ -86,30 +91,117 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         myFavorites: payload,
         myFavoritesCopy: payload,
+        favoritesFirst: payload,
       };
     case ORDER_FAV:
+      let copia = [...state.myFavorites];
       switch (payload) {
         case "Ascendente":
           return {
             ...state,
-            myFavorites: state.myFavoritesCopy.sort((a, b) => a.id - b.id),
+            myFavorites: [...state.myFavorites.sort((a, b) => a.id - b.id)],
+            order: 1,
           };
         case "Descendente":
           return {
             ...state,
-            myFavorites: state.myFavoritesCopy.sort((a, b) => b.id - a.id),
+            myFavorites: [...state.myFavorites.sort((a, b) => b.id - a.id)],
+            order: 2,
           };
         case "":
-          console.log("entre");
+          if (!state.filtered) {
+            return {
+              ...state,
+              myFavorites: [...state.myFavoritesCopy],
+              order: 0,
+            };
+          }
           return {
             ...state,
-            myFavorites: state.myFavoritesCopy,
+            myFavorites: [...state.filtered],
+            order: 0,
+          };
+      }
+    case FILTER_GENDER:
+      if (!payload) {
+        switch (state.order) {
+          case 0:
+            return {
+              ...state,
+              myFavorites: [...state.myFavoritesCopy],
+              filtered: false,
+            };
+          case 1:
+            return {
+              ...state,
+              myFavorites: [
+                ...state.myFavoritesCopy.sort((a, b) => a.id - b.id),
+              ],
+              filtered: false,
+            };
+          case 2:
+            return {
+              ...state,
+              myFavorites: [
+                ...state.myFavoritesCopy.sort((a, b) => b.id - a.id),
+              ],
+              filtered: false,
+            };
+        }
+      }
+      switch (state.order) {
+        case 0:
+          return {
+            ...state,
+            filtered: [
+              ...state.myFavoritesCopy.filter(
+                (char) => char.gender === payload
+              ),
+            ],
+            myFavorites: [
+              ...state.myFavoritesCopy.filter(
+                (char) => char.gender === payload
+              ),
+            ],
+          };
+        case 1:
+          return {
+            ...state,
+            filtered: [
+              ...state.myFavoritesCopy.filter(
+                (char) => char.gender === payload
+              ),
+            ],
+            myFavorites: [
+              ...state.myFavoritesCopy
+                .filter((char) => char.gender === payload)
+                .sort((a, b) => a.id - b.id),
+            ],
+          };
+        case 2:
+          return {
+            ...state,
+            filtered: [
+              ...state.myFavoritesCopy.filter(
+                (char) => char.gender === payload
+              ),
+            ],
+            myFavorites: [
+              ...state.myFavoritesCopy
+                .filter((char) => char.gender === payload)
+                .sort((a, b) => b.id - a.id),
+            ],
           };
       }
     case SET_VALIDATE:
       return {
         ...state,
         validate: !state.validate,
+      };
+    case SET_FIRSTFAV:
+      return {
+        ...state,
+        favoritesFirst: [...state.myFavoritesCopy],
       };
     case SET_LOGIN:
       return {
