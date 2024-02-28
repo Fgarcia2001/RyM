@@ -6,15 +6,18 @@ import Detail from "./Views/Detail/Detail";
 import Favorites from "./Components/Favorites/Favorites";
 import About from "./Components/About/About";
 import Footer from "./Components/Footer/Footer";
+import CloseSave from "./Components/CloseSafe/CloseSave";
+import Save from "./Components/Save/Save";
 import "./index.css";
 import "./App.css";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const valid = useSelector((state) => state.validate);
-
+  const [save, setSave] = useState(false);
+  const [post, setPost] = useState(false);
   useEffect(() => {
     if (!valid) {
       navigate("/");
@@ -24,7 +27,7 @@ function App() {
     <div className="containerApp">
       {location.pathname !== "/" &&
       !location.pathname.startsWith("/detail/") ? (
-        <NavBar />
+        <NavBar setSave={setSave} setPost={setPost} />
       ) : null}
       <Routes>
         <Route path="/" element={<Landing />}></Route>
@@ -33,6 +36,8 @@ function App() {
         <Route path="/favorites" element={<Favorites />}></Route>
         <Route path="/about" element={<About />}></Route>
       </Routes>
+      {save && <CloseSave setSave={setSave}></CloseSave>}
+      {post && <Save setPost={setPost}></Save>}
       <Footer />
     </div>
   );

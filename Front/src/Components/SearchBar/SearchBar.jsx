@@ -11,6 +11,7 @@ const SearchBar = () => {
   const [id, setState] = useState("");
   const [find, setFind] = useState(false);
   const [noexist, setNoexist] = useState(false);
+  const [vacio, setVacio] = useState(false);
   const handleChange = (event) => {
     if (event.target.value != "") {
       setState(event.target.value.trim());
@@ -19,7 +20,13 @@ const SearchBar = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    if (id === "") {
+      setVacio(true);
+      setTimeout(() => {
+        setVacio(false);
+      }, 3000);
+      return;
+    }
     const encontrado = characters.some((char) => char.id == id);
     if (!encontrado) {
       const response = await dispatch(getCharacterId(id));
@@ -37,13 +44,17 @@ const SearchBar = () => {
     }
 
     document.getElementById("search").value = "";
+    setState("");
   };
   useEffect(() => {}, [characters]);
   return (
-    <div>
+    <div className={style.formId}>
       <form onSubmit={handleSubmit}>
-        <input type="number" onChange={handleChange} id="search" />
-        <input type="submit" />
+        <div>
+          <input type="number" onChange={handleChange} id="search" />
+          <input type="submit" />
+          {vacio && <p className={style.p}>Ingrese un numero</p>}
+        </div>
         {find ? (
           <div className={style.mensajeAlerta}>
             <p>Repetido</p>

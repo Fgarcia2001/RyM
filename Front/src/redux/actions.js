@@ -139,7 +139,7 @@ const postFav = (objeto, token) => {
       });
       return true;
     } catch (error) {
-      alert("No se pudo guardar cambios");
+      return false;
     }
   };
 };

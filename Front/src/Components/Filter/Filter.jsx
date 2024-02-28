@@ -42,7 +42,6 @@ const Filter = () => {
         placeholder="Seleccionar genero"
       >
         {generos.map((gen) => {
-          console.log(gen);
           cant = favoritos.filter((fav) => fav.gender === gen);
           return (
             <SelectItem key={gen} value={gen}>

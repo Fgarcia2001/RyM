@@ -1,29 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "./NavBar.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import { postFav, setValidate, setValidateGetFav } from "../../redux/actions";
 
-const NavBar = () => {
+const NavBar = ({ setSave, setPost }) => {
   const token = localStorage.getItem("token");
   const favorites = useSelector((state) => state.myFavoritesCopy);
   const favfirst = useSelector((state) => state.favoritesFirst);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const favIdFirst = favfirst.map((fav) => fav.id);
   const favId = favorites.map((fav) => fav.id);
-  const guardar = () => {
+  const guardar = async () => {
     const trueOrFalse = verificar(favId, favIdFirst);
-    !trueOrFalse
-      ? dispatch(postFav({ favId }, token))
-      : alert("No se modifico los favoritos");
+    if (!trueOrFalse) {
+      const post = await dispatch(postFav({ favId }, token));
+      if (!post) {
+        alert("Error al guardar los favoritos");
+      } else {
+        setPost(true);
+      }
+    } else {
+      alert("No se modifico los favoritos");
+    }
   };
   const logout = () => {
-    localStorage.removeItem("token");
-    dispatch(setValidate());
-    dispatch(setValidateGetFav(false));
-    navigate("/");
+    const close = verificar(favIdFirst, favId);
+    if (!close) {
+      console.log("entre");
+      setSave(true);
+    } else {
+      localStorage.removeItem("token");
+      dispatch(setValidate());
+      dispatch(setValidateGetFav(false));
+      navigate("/");
+    }
   };
 
   const verificar = (arr1, arr2) => {
