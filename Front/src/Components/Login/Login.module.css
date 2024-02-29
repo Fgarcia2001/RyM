@@ -1,3 +1,17 @@
 .login {
   height: 93vh;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+}
+.acomodo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  border: 2px solid black;
 }

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getLoginValidate, setValidate } from "../../redux/actions";
 import { useNavigate } from "react-router-dom";
+import Form from "react-bootstrap/Form";
 const Login = (props) => {
   const parseJwt = (token) => {
     const base64Url = token.split(".")[1];
@@ -58,26 +59,42 @@ const Login = (props) => {
   }, [isValid]);
   return (
     <div className={style.login}>
-      <form onSubmit={handleSubmit}>
-        <label>EMAIL</label>
-        <input
-          type="text"
-          name="email"
-          onChange={handleChange}
-          value={state.email}
-        />
-        <label>PASSWORD</label>
-        <input
-          type="text"
-          name="password"
-          onChange={handleChange}
-          value={state.password}
-        />
-        <input type="submit" />
-        <button type="button" onClick={signup}>
-          Sign Up
-        </button>
-      </form>
+      <div className={style.acomodo}>
+        <div>HOLA</div>
+        <form onSubmit={handleSubmit} className={style.form}>
+          <label for="exampleFormControlInput1" class="form-label">
+            Email
+          </label>
+          <input
+            type="text"
+            name="email"
+            class="form-control"
+            id="exampleFormControlInput1"
+            placeholder="tunombre@example.com"
+            onChange={handleChange}
+            value={state.email}
+          />
+          <label for="inputPassword5" class="form-label">
+            Password
+          </label>
+          <input
+            type="password"
+            id="inputPassword5"
+            class="form-control"
+            aria-describedby="passwordHelpBlock"
+            name="password"
+            onChange={handleChange}
+            value={state.password}
+          />
+          <div id="passwordHelpBlock" class="form-text">
+            Tu contraseña debe tener entre 8-20 caracteres
+          </div>
+          <button type="submit">Iniciar sesion</button>
+          <button type="button" onClick={signup}>
+            Crear cuenta
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
