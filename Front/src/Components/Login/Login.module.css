@@ -1,17 +1,28 @@
 .login {
-  height: 93vh;
-
   display: flex;
 
   justify-content: center;
   align-items: center;
-  gap: 3rem;
 }
-.acomodo {
+.form {
   display: flex;
   flex-direction: column;
+  padding: 0 30px 0 30px;
+  width: 100%;
+  gap: 2rem;
+}
+.botones {
+  display: flex;
   justify-content: center;
-  align-items: center;
   gap: 3rem;
-  border: 2px solid black;
+  align-items: center;
+}
+.error {
+  margin-left: 20%;
+  font-weight: bold;
+  color: rgb(255, 0, 0);
+}
+.loading {
+  display: flex;
+  justify-content: center;
 }

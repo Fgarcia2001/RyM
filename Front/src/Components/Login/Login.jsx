@@ -1,10 +1,11 @@
 import React from "react";
 import style from "./Login.module.css";
+import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getLoginValidate, setValidate } from "../../redux/actions";
 import { useNavigate } from "react-router-dom";
-import Form from "react-bootstrap/Form";
+
 const Login = (props) => {
   const parseJwt = (token) => {
     const base64Url = token.split(".")[1];
@@ -22,7 +23,9 @@ const Login = (props) => {
     return JSON.parse(jsonPayload);
   };
   const [isValid, setIsValid] = useState(false);
-
+  const [msgPass, setMsgPass] = useState(false);
+  const [msgEmail, setMsgEmail] = useState(false);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -41,15 +44,30 @@ const Login = (props) => {
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setMsgEmail(false);
+    setMsgPass(false);
+    setLoading(true);
+
     const response = await dispatch(getLoginValidate(state));
-    console.log(response.token);
+
     if (response.token) {
       localStorage.setItem("token", response.token);
 
       const parsedToken = parseJwt(localStorage.getItem("token"));
-
+      setLoading(false);
       setIsValid(parsedToken.exp * 1000 > Date.now());
+      return;
     }
+    if (response === "Contraseña incorrecta") {
+      setLoading(false);
+      setMsgPass(true);
+      setMsgEmail(false);
+      return;
+    }
+    setLoading(false);
+    setMsgEmail(true);
+    setMsgPass(false);
+    return;
   };
   useEffect(() => {
     if (isValid) {
@@ -58,13 +76,25 @@ const Login = (props) => {
     }
   }, [isValid]);
   return (
-    <div className={style.login}>
-      <div className={style.acomodo}>
-        <div>HOLA</div>
-        <form onSubmit={handleSubmit} className={style.form}>
-          <label for="exampleFormControlInput1" class="form-label">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{
+        duration: 0.9,
+      }}
+      className={style.login}
+    >
+      <form onSubmit={handleSubmit} className={style.form}>
+        <div>
+          <label
+            for="exampleFormControlInput1"
+            class="font-semibold text-black form-label"
+          >
             Email
           </label>
+          {msgEmail && (
+            <span className={style.error}> *Email no registrado</span>
+          )}
           <input
             type="text"
             name="email"
@@ -74,9 +104,17 @@ const Login = (props) => {
             onChange={handleChange}
             value={state.email}
           />
-          <label for="inputPassword5" class="form-label">
-            Password
+        </div>
+        <div>
+          <label
+            for="inputPassword5"
+            class="font-semibold text-white form-label"
+          >
+            Contraseña
           </label>
+          {msgPass && (
+            <span className={style.error}> *Contraseña incorrecta</span>
+          )}
           <input
             type="password"
             id="inputPassword5"
@@ -86,16 +124,33 @@ const Login = (props) => {
             onChange={handleChange}
             value={state.password}
           />
-          <div id="passwordHelpBlock" class="form-text">
-            Tu contraseña debe tener entre 8-20 caracteres
+        </div>
+        {!loading ? (
+          <div className={style.botones}>
+            <button
+              type="submit"
+              class="bg-white  font-bold py-2 px-4 border border-gray-400 rounded shadow"
+            >
+              Iniciar sesion
+            </button>
+
+            <button
+              type="button"
+              onClick={signup}
+              class="bg-transparent hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+            >
+              Registrarse
+            </button>
           </div>
-          <button type="submit">Iniciar sesion</button>
-          <button type="button" onClick={signup}>
-            Crear cuenta
-          </button>
-        </form>
-      </div>
-    </div>
+        ) : (
+          <div className={style.loading}>
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        )}
+      </form>
+    </motion.div>
   );
 };
 

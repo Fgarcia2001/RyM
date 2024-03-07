@@ -6,9 +6,3 @@
   flex-direction: column;
   justify-content: space-between;
 }
-.cartelGuardar {
-  position: absolute;
-  background-color: rgba(78, 78, 78, 0.588);
-  width: 100%;
-  height: 100%;
-}

@@ -1,3 +1,20 @@
 .signup {
-  height: 93vh;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 0 30px 0 30px;
+  width: 100%;
+
+  gap: 2rem;
+}
+.botones {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  align-items: center;
 }

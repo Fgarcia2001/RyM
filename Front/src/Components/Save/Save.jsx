@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import style from "./Save.module.css";
+import { motion } from "framer-motion";
 const Save = ({ setPost }) => {
   const [segundosRestantes, setSegundosRestantes] = useState(3);
   useEffect(() => {
@@ -14,10 +15,15 @@ const Save = ({ setPost }) => {
   }, [setPost]);
   return (
     <div className={style.container}>
-      <div className={style.cartel}>
+      <motion.div
+        className={style.cartel}
+        initial={{ opacity: 0.2, scale: 0.2 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+      >
         <p>CAMBIOS GUARDADOS</p>
         <p>({segundosRestantes})</p>
-      </div>
+      </motion.div>
     </div>
   );
 };

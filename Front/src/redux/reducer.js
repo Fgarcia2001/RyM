@@ -81,11 +81,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         detail: "",
       };
-    case GET_VALIDATE_LOGIN:
-      return {
-        ...state,
-        login: payload,
-      };
+
     case GET_FAVORITES:
       return {
         ...state,

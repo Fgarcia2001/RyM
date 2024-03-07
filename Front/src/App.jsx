@@ -8,6 +8,8 @@ import About from "./Components/About/About";
 import Footer from "./Components/Footer/Footer";
 import CloseSave from "./Components/CloseSafe/CloseSave";
 import Save from "./Components/Save/Save";
+import { motion, AnimatePresence } from "framer-motion";
+
 import "./index.css";
 import "./App.css";
 import { useSelector } from "react-redux";
@@ -37,7 +39,11 @@ function App() {
         <Route path="/about" element={<About />}></Route>
       </Routes>
       {save && <CloseSave setSave={setSave}></CloseSave>}
-      {post && <Save setPost={setPost}></Save>}
+      {post && (
+        <AnimatePresence>
+          <Save setPost={setPost}></Save>
+        </AnimatePresence>
+      )}
       <Footer />
     </div>
   );

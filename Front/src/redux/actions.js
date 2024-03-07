@@ -58,15 +58,18 @@ const clearDetail = () => {
 const getLoginValidate = (state) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(`${URL}/user/login`, state);
-
-      return response.data;
-      dispatch({
-        type: GET_VALIDATE_LOGIN,
-        payload: response.data,
+      return new Promise((resolve) => {
+        setTimeout(async () => {
+          try {
+            const response = await axios.post(`${URL}/user/login`, state);
+            resolve(response.data);
+          } catch (error) {
+            alert(error);
+          }
+        }, 3000);
       });
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
   };
 };
