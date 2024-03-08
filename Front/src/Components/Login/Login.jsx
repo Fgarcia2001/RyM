@@ -86,15 +86,17 @@ const Login = (props) => {
     >
       <form onSubmit={handleSubmit} className={style.form}>
         <div>
-          <label
-            for="exampleFormControlInput1"
-            class="font-semibold text-black form-label"
-          >
-            Email
-          </label>
-          {msgEmail && (
-            <span className={style.error}> *Email no registrado</span>
-          )}
+          <div className={style.labelError}>
+            <label
+              for="exampleFormControlInput1"
+              class="font-semibold text-black form-label"
+            >
+              Email
+            </label>
+            {msgEmail && (
+              <span className={style.error}> *Email no registrado</span>
+            )}
+          </div>
           <input
             type="text"
             name="email"
@@ -106,15 +108,17 @@ const Login = (props) => {
           />
         </div>
         <div>
-          <label
-            for="inputPassword5"
-            class="font-semibold text-white form-label"
-          >
-            Contraseña
-          </label>
-          {msgPass && (
-            <span className={style.error}> *Contraseña incorrecta</span>
-          )}
+          <div className={style.labelError}>
+            <label
+              for="inputPassword5"
+              class="font-semibold text-white form-label"
+            >
+              Contraseña
+            </label>
+            {msgPass && (
+              <span className={style.error}> *Contraseña incorrecta</span>
+            )}
+          </div>
           <input
             type="password"
             id="inputPassword5"

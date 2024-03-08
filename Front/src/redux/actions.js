@@ -56,20 +56,12 @@ const clearDetail = () => {
   };
 };
 const getLoginValidate = (state) => {
-  return async (dispatch) => {
+  return async () => {
     try {
-      return new Promise((resolve) => {
-        setTimeout(async () => {
-          try {
-            const response = await axios.post(`${URL}/user/login`, state);
-            resolve(response.data);
-          } catch (error) {
-            alert(error);
-          }
-        }, 3000);
-      });
+      const response = await axios.post(`${URL}/user/login`, state);
+      return response.data;
     } catch (error) {
-      alert(error);
+      return "Error de servidor";
     }
   };
 };

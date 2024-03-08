@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import validate from "./Validate";
 import style from "./Signup.module.css";
 import { useDispatch } from "react-redux";
 import { signup } from "../../redux/actions";
@@ -12,6 +13,10 @@ const Signup = (props) => {
     password: "",
     repPassword: "",
   });
+  const [errorEmail, setErrorEmail] = useState(true);
+  const [errorPass, setErrorPass] = useState(true);
+  const [errorPass2, setErrorPass2] = useState(true);
+  const [iguales, setIguales] = useState(false);
   const volver = () => {
     props.state(!props.state);
   };
@@ -20,6 +25,14 @@ const Signup = (props) => {
       ...date,
       [event.target.name]: event.target.value,
     });
+    switch (event.target.name) {
+      case "email":
+        setErrorEmail(validate(event.target.value));
+        break;
+
+      default:
+        break;
+    }
   };
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -38,12 +51,17 @@ const Signup = (props) => {
     >
       <form className={style.form} onSubmit={handleSubmit}>
         <div>
-          <label
-            for="exampleFormControlInput1"
-            class="font-semibold form-label"
-          >
-            *Email
-          </label>
+          <div className={style.labelError}>
+            <label
+              for="exampleFormControlInput1"
+              class="font-semibold form-label"
+            >
+              *Email
+            </label>
+            {!errorEmail && (
+              <span className={style.error}>Ingrese email válido</span>
+            )}
+          </div>
           <input
             class="form-control"
             placeholder="tunombre@example.com"
@@ -79,12 +97,19 @@ const Signup = (props) => {
             onChange={handleChange}
           />
         </div>
+        <div className={style.errores}>
+          Contraseña entre 5-10 caracteres
+          {!errorPass && !errorPass2 ? "✅" : "❌"}
+          <br /> Contraseñas iguales ❌
+        </div>
+
         <div className={style.botones}>
           <button
             class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
             type="submit"
+            disabled={true}
           >
-            Create
+            Crear
           </button>
           <button
             type="button"

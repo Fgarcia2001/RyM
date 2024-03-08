@@ -12,17 +12,22 @@
   gap: 2rem;
 }
 .botones {
+  margin-top: 20px;
   display: flex;
   justify-content: center;
   gap: 3rem;
   align-items: center;
 }
 .error {
-  margin-left: 20%;
   font-weight: bold;
   color: rgb(255, 0, 0);
 }
 .loading {
+  margin-top: 20px;
   display: flex;
   justify-content: center;
+}
+.labelError {
+  display: flex;
+  justify-content: space-between;
 }
