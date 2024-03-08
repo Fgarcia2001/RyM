@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import validate from "./Validate";
+import { validateMail, validatePass, validateIgual } from "./Validate";
 import style from "./Signup.module.css";
 import { useDispatch } from "react-redux";
 import { signup } from "../../redux/actions";
@@ -13,10 +13,11 @@ const Signup = (props) => {
     password: "",
     repPassword: "",
   });
-  const [errorEmail, setErrorEmail] = useState(true);
-  const [errorPass, setErrorPass] = useState(true);
-  const [errorPass2, setErrorPass2] = useState(true);
-  const [iguales, setIguales] = useState(false);
+  const [errorEmail, setErrorEmail] = useState(" ");
+  const [errorPass, setErrorPass] = useState("");
+  const [errorPass2, setErrorPass2] = useState("");
+  const [iguales, setIguales] = useState(" ");
+  const [loading, setLoading] = useState(false);
   const volver = () => {
     props.state(!props.state);
   };
@@ -27,19 +28,39 @@ const Signup = (props) => {
     });
     switch (event.target.name) {
       case "email":
-        setErrorEmail(validate(event.target.value));
+        setErrorEmail(validateMail(event.target.value));
         break;
+      case "password":
+        setErrorPass(validatePass(event.target.value));
+        break;
+      case "repPassword":
+        setErrorPass2(validatePass(event.target.value));
 
+        break;
       default:
         break;
     }
   };
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    dispatch(signup({ email: date.email, password: date.password }));
-    props.state(!props.state);
+    setLoading(true);
+    const response = await dispatch(
+      signup({ email: date.email, password: date.password })
+    );
+    setLoading(false);
+    if (response === "Creado") {
+      props.state(!props.state);
+      alert("Usuario creado");
+    }
   };
-  useEffect(() => {}, [date]);
+  const verificar = () => {
+    if (errorEmail && errorPass && errorPass2 && iguales) return false;
+    return true;
+  };
+
+  useEffect(() => {
+    setIguales(validateIgual(date.password, date.repPassword));
+  }, [date]);
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -58,7 +79,7 @@ const Signup = (props) => {
             >
               *Email
             </label>
-            {!errorEmail && (
+            {errorEmail === false && (
               <span className={style.error}>Ingrese email válido</span>
             )}
           </div>
@@ -88,7 +109,6 @@ const Signup = (props) => {
             *Repetir contraseña
           </label>
           <input
-            id="inputPassword5"
             class="form-control"
             aria-describedby="passwordHelpBlock"
             type="password"
@@ -98,27 +118,34 @@ const Signup = (props) => {
           />
         </div>
         <div className={style.errores}>
-          Contraseña entre 5-10 caracteres
-          {!errorPass && !errorPass2 ? "✅" : "❌"}
-          <br /> Contraseñas iguales ❌
+          Contraseñas entre 5-10 caracteres
+          {!errorPass || !errorPass2 ? "❌" : "✅"}
+          <br /> Contraseñas iguales {iguales ? "✅" : "❌"}
         </div>
-
-        <div className={style.botones}>
-          <button
-            class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-            type="submit"
-            disabled={true}
-          >
-            Crear
-          </button>
-          <button
-            type="button"
-            onClick={volver}
-            class="bg-transparent hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-          >
-            Volver
-          </button>
-        </div>
+        {!loading ? (
+          <div className={style.botones}>
+            <button
+              class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+              type="submit"
+              disabled={verificar()}
+            >
+              Crear
+            </button>
+            <button
+              type="button"
+              onClick={volver}
+              class="bg-transparent hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+            >
+              Volver
+            </button>
+          </div>
+        ) : (
+          <div className={style.loading}>
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        )}
       </form>
     </motion.div>
   );

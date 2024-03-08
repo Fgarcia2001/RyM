@@ -14,8 +14,9 @@
 .botones {
   margin-top: 20px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  gap: 3rem;
+  gap: 1rem;
   align-items: center;
 }
 .error {
@@ -23,7 +24,7 @@
   color: rgb(255, 0, 0);
 }
 .loading {
-  margin-top: 20px;
+  margin-top: 40px;
   display: flex;
   justify-content: center;
 }

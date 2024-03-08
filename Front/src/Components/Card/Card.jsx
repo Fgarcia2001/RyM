@@ -35,9 +35,16 @@ const Card = ({ id, name, image, char, gender, origin, status, species }) => {
         className={style.CartaCharacter}
       >
         <p>{id}</p>
+        {char && (
+          <button
+            type="button"
+            class="btn-close"
+            aria-label="Close"
+            onClick={close}
+          ></button>
+        )}
         <div className={style.nameButton}>
           <h2>{name}</h2>
-          {char && <button onClick={close}>X</button>}
           {<button onClick={handleFav}>{!fav ? "🤍" : "❤"}</button>}
         </div>
         <img src={image} alt="character" className={style.imagenChar} />

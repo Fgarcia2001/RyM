@@ -3,9 +3,11 @@ import style from "./Login.module.css";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { getLoginValidate, setValidate } from "../../redux/actions";
 import { useNavigate } from "react-router-dom";
-
+import github from "../../assets/github.svg";
+const linkG = "https://github.com/Fgarcia2001";
 const Login = (props) => {
   const parseJwt = (token) => {
     const base64Url = token.split(".")[1];
@@ -131,18 +133,10 @@ const Login = (props) => {
         </div>
         {!loading ? (
           <div className={style.botones}>
-            <button
-              type="submit"
-              class="bg-white  font-bold py-2 px-4 border border-gray-400 rounded shadow"
-            >
+            <button type="submit" class="btn btn-light ">
               Iniciar sesion
             </button>
-
-            <button
-              type="button"
-              onClick={signup}
-              class="bg-transparent hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-            >
+            <button type="button" onClick={signup} class="btn btn-secondary">
               Registrarse
             </button>
           </div>

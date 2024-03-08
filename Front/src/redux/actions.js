@@ -72,7 +72,7 @@ const signup = (date) => {
       const response = await axios.post(`${URL}/user/signup`, date);
       return response.data;
     } catch (error) {
-      alert("No se pudo crear usuario");
+      return "Error de servidor al registrarse";
     }
   };
 };

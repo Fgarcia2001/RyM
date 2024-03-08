@@ -7,8 +7,9 @@ const postUser = async ({ email, password }) => {
     defaults: { password },
   });
 
-  if (create) return user.dataValues;
-  else return "Ya existe el usuario";
+  if (!create) return "Email ya registrado";
+
+  return "Creado";
 };
 
 const getLogin = async (email, password) => {
