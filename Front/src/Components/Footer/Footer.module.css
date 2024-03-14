@@ -2,5 +2,33 @@
   width: 100vw;
   height: 7vh;
   color: white;
-  background-color: rgb(0, 0, 0);
+  background-image: url("../../assets/footerDefi.png");
+  background-size: cover;
+  background-repeat: repeat;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.copy {
+  background-color: white;
+  display: flex;
+  color: black;
+}
+
+.iconos {
+  display: flex;
+  gap: 0.5rem;
+}
+.a {
+  background-color: rgb(255, 255, 255);
+  width: 35px;
+  border-radius: 10px;
+  border: 2px solid white;
+  box-shadow: inset;
+}
+.a2 {
+  background-color: rgb(0, 172, 20);
+  border: 2px solid green;
+  border-radius: 16px;
+  width: 35px;
 }

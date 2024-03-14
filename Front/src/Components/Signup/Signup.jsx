@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { signup } from "../../redux/actions";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import gif from "../../assets/rickandmortyGif.gif";
 const Signup = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const Signup = (props) => {
   const [errorPass2, setErrorPass2] = useState("");
   const [iguales, setIguales] = useState(" ");
   const [loading, setLoading] = useState(false);
+  const [exist, setExist] = useState(false);
   const volver = () => {
     props.state(!props.state);
   };
@@ -51,7 +53,11 @@ const Signup = (props) => {
     if (response === "Creado") {
       props.state(!props.state);
       alert("Usuario creado");
+      return;
     }
+
+    setExist(true);
+    return;
   };
   const verificar = () => {
     if (errorEmail && errorPass && errorPass2 && iguales) return false;
@@ -144,6 +150,21 @@ const Signup = (props) => {
             <div class="spinner-border" role="status">
               <span class="visually-hidden">Loading...</span>
             </div>
+          </div>
+        )}
+        {exist && (
+          <div onClick={() => setExist(false)} className={style.alert}>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className={style.cartelExist}
+            >
+              <img src={gif} alt="gif" className={style.gif} />
+              <button onClick={() => setExist(false)} className={style.close}>
+                X
+              </button>
+              <p className={style.textoExist}>Ya existe usuario</p>
+            </motion.div>
           </div>
         )}
       </form>
