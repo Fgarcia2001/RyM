@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import style from "./NavBar.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
+import NavBarTools from "../NavBarResponsive/NavBarTools";
 import { useDispatch, useSelector } from "react-redux";
 import { postFav, setValidate, setValidateGetFav } from "../../redux/actions";
 
@@ -17,12 +18,14 @@ const NavBar = ({ setSave, setPost }) => {
   const guardar = async () => {
     const trueOrFalse = verificar(favId, favIdFirst);
     if (!trueOrFalse) {
+      setPost(true);
       const post = await dispatch(postFav({ favId }, token));
       if (!post) {
         alert("Error al guardar los favoritos");
-      } else {
-        setPost(true);
+        setPost(false);
+        return;
       }
+      setPost(false);
     } else {
       alert("No se modifico los favoritos");
     }
@@ -30,7 +33,6 @@ const NavBar = ({ setSave, setPost }) => {
   const logout = () => {
     const close = verificar(favIdFirst, favId);
     if (!close) {
-      console.log("entre");
       setSave(true);
     } else {
       localStorage.removeItem("token");
@@ -50,6 +52,7 @@ const NavBar = ({ setSave, setPost }) => {
 
   return (
     <div className={style.navContainer}>
+      <NavBarTools></NavBarTools>
       <div className={style.links}>
         <Link to="/about">About</Link>
         <Link to="/home">Home</Link>
@@ -57,8 +60,12 @@ const NavBar = ({ setSave, setPost }) => {
       </div>
       <SearchBar />
       <div>
-        <button onClick={guardar}>Guardar cambios</button>
-        <button onClick={logout}>Cerrar sesion</button>
+        <button onClick={guardar} className={style.btnSafe}>
+          Guardar cambios
+        </button>
+        <button onClick={logout} className={style.btnLogout}>
+          Cerrar sesion
+        </button>
       </div>
     </div>
   );

@@ -1,18 +1,7 @@
 import React, { useEffect, useState } from "react";
 import style from "./Save.module.css";
 import { motion } from "framer-motion";
-const Save = ({ setPost }) => {
-  const [segundosRestantes, setSegundosRestantes] = useState(3);
-  useEffect(() => {
-    const intervalo = setInterval(() => {
-      setSegundosRestantes((prevSegundos) => prevSegundos - 1);
-    }, 1000);
-    setTimeout(() => {
-      clearInterval(intervalo);
-      setPost(false);
-    }, 3000);
-    return () => clearInterval(intervalo);
-  }, [setPost]);
+const Save = () => {
   return (
     <div className={style.container}>
       <motion.div
@@ -21,8 +10,10 @@ const Save = ({ setPost }) => {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <p>CAMBIOS GUARDADOS</p>
-        <p>({segundosRestantes})</p>
+        <div className={style.save}>
+          <h3>Guardando cambios</h3>
+          <div class="spinner-border" role="status"></div>
+        </div>
       </motion.div>
     </div>
   );

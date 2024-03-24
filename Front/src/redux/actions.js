@@ -11,6 +11,7 @@ import {
   ORDER_FAV,
   FILTER_GENDER,
   SET_FIRSTFAV,
+  SET_MENU,
 } from "./types";
 import axios from "axios";
 
@@ -120,7 +121,7 @@ const setValidateGetFav = (validate) => {
     });
   };
 };
-const postFav = (objeto, token) => {
+/* const postFav = (objeto, token) => {
   return async (dispatch) => {
     try {
       await axios.post(`${URL}/favorites`, objeto, {
@@ -137,7 +138,34 @@ const postFav = (objeto, token) => {
       return false;
     }
   };
+}; */
+
+const postFav = (objeto, token) => {
+  return async (dispatch) => {
+    try {
+      // Simular una demora de 4 segundos
+      await new Promise((resolve) => setTimeout(resolve, 4000));
+
+      // Tu lógica original para hacer la petición POST
+      await axios.post(`${URL}/favorites`, objeto, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      // Despachar la acción después de la demora
+      dispatch({
+        type: SET_FIRSTFAV,
+      });
+
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
 };
+
 const setValidate = () => {
   return (dispatch) => {
     dispatch({
@@ -161,6 +189,13 @@ const filterGender = (gender) => {
     });
   };
 };
+const setMenu = () => {
+  return (dispatch) => {
+    dispatch({
+      type: SET_MENU,
+    });
+  };
+};
 export {
   getCharacterId,
   getLoginValidate,
@@ -175,4 +210,5 @@ export {
   setValidate,
   order,
   filterGender,
+  setMenu,
 };

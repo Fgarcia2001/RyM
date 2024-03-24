@@ -12,6 +12,7 @@ import {
   ORDER_FAV,
   FILTER_GENDER,
   SET_FIRSTFAV,
+  SET_MENU,
 } from "./types";
 const initialState = {
   characters: [],
@@ -21,6 +22,7 @@ const initialState = {
   myFavoritesCopy: [],
   favoritesFirst: [],
   order: 0,
+  openMenu: false,
   filtered: false,
   getFavOnly1: false,
   validate: false,
@@ -203,6 +205,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         login: "",
+      };
+    case SET_MENU:
+      return {
+        ...state,
+        openMenu: !state.openMenu,
       };
     default:
       return {

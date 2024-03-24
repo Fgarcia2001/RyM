@@ -3,7 +3,7 @@ import style from "./Login.module.css";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import validate from "./Validate";
 import { getLoginValidate, setValidate } from "../../redux/actions";
 import { useNavigate } from "react-router-dom";
 import github from "../../assets/github.svg";
@@ -28,6 +28,8 @@ const Login = (props) => {
   const [msgPass, setMsgPass] = useState(false);
   const [msgEmail, setMsgEmail] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [completeEmail, setCompleteEmail] = useState(false);
+  const [completePass, setCompletePass] = useState(false);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -46,10 +48,17 @@ const Login = (props) => {
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    const verificar = validate(
+      state.email,
+      state.password,
+      setCompleteEmail,
+      setCompletePass
+    );
+
     setMsgEmail(false);
     setMsgPass(false);
     setLoading(true);
-
     const response = await dispatch(getLoginValidate(state));
 
     if (response.token) {
@@ -91,7 +100,7 @@ const Login = (props) => {
           <div className={style.labelError}>
             <label
               for="exampleFormControlInput1"
-              class="font-semibold text-black form-label"
+              class="font-serif font-semibold text-white form-label"
             >
               Email
             </label>
@@ -131,12 +140,17 @@ const Login = (props) => {
             value={state.password}
           />
         </div>
+
         {!loading ? (
           <div className={style.botones}>
-            <button type="submit" class="btn btn-light ">
+            <button type="submit" class="btn btn-light w-[120px] ">
               Iniciar sesion
             </button>
-            <button type="button" onClick={signup} class="btn btn-secondary">
+            <button
+              type="button"
+              onClick={signup}
+              class="btn btn-dark w-[120px] "
+            >
               Registrarse
             </button>
           </div>

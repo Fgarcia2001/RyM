@@ -81,7 +81,7 @@ const Signup = (props) => {
           <div className={style.labelError}>
             <label
               for="exampleFormControlInput1"
-              class="font-semibold form-label"
+              class="font-serif font-semibold form-label text-white"
             >
               *Email
             </label>
@@ -100,7 +100,10 @@ const Signup = (props) => {
         </div>
 
         <div>
-          <label for="inputPassword5" class="font-semibold form-label">
+          <label
+            for="inputPassword5"
+            class="font-serif font-semibold form-label text-white"
+          >
             *Contraseña
           </label>
           <input
@@ -111,7 +114,10 @@ const Signup = (props) => {
             name="password"
             onChange={handleChange}
           />
-          <label for="inputPassword5" class="font-semibold  form-label">
+          <label
+            for="inputPassword5"
+            class="font-serif font-semibold  form-label text-white"
+          >
             *Repetir contraseña
           </label>
           <input
@@ -125,8 +131,8 @@ const Signup = (props) => {
         </div>
         <div className={style.errores}>
           Contraseñas entre 5-10 caracteres
-          {!errorPass || !errorPass2 ? "❌" : "✅"}
-          <br /> Contraseñas iguales {iguales ? "✅" : "❌"}
+          {!errorPass || !errorPass2 ? " ❌" : " ✅"}
+          <br /> Contraseñas iguales {iguales ? " ✅" : " ❌"}
         </div>
         {!loading ? (
           <div className={style.botones}>
@@ -137,10 +143,11 @@ const Signup = (props) => {
             >
               Crear
             </button>
+
             <button
               type="button"
               onClick={volver}
-              class="bg-transparent hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+              class="bg-transparent  text-black font-semibold py-2 px-4 border border-gray-400 rounded shadow"
             >
               Volver
             </button>

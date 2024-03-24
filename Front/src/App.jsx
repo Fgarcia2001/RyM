@@ -8,6 +8,7 @@ import About from "./Components/About/About";
 import Footer from "./Components/Footer/Footer";
 import CloseSave from "./Components/CloseSafe/CloseSave";
 import Save from "./Components/Save/Save";
+import NavBarLinks from "./Components/NavBarResponsive/NavBarLinks";
 import { motion, AnimatePresence } from "framer-motion";
 
 import "./index.css";
@@ -18,6 +19,7 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const valid = useSelector((state) => state.validate);
+  const open = useSelector((state) => state.openMenu);
   const [save, setSave] = useState(false);
   const [post, setPost] = useState(false);
   useEffect(() => {
@@ -38,6 +40,11 @@ function App() {
         <Route path="/favorites" element={<Favorites />}></Route>
         <Route path="/about" element={<About />}></Route>
       </Routes>
+      {open && (
+        <AnimatePresence>
+          <NavBarLinks />
+        </AnimatePresence>
+      )}
       {save && <CloseSave setSave={setSave}></CloseSave>}
       {post && (
         <AnimatePresence>
