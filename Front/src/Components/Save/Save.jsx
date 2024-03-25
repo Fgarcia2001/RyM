@@ -11,7 +11,7 @@ const Save = () => {
         transition={{ duration: 0.5 }}
       >
         <div className={style.save}>
-          <h3>Guardando cambios</h3>
+          <h3 className={style.h3}>Guardando cambios</h3>
           <div class="spinner-border" role="status"></div>
         </div>
       </motion.div>

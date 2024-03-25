@@ -3,13 +3,16 @@ import style from "./NavBar.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
 import NavBarTools from "../NavBarResponsive/NavBarTools";
+import Logout from "../Logout/Logout";
 import { useDispatch, useSelector } from "react-redux";
 import { postFav, setValidate, setValidateGetFav } from "../../redux/actions";
+import save from "../../assets/floppy.svg";
 
 const NavBar = ({ setSave, setPost }) => {
   const token = localStorage.getItem("token");
   const favorites = useSelector((state) => state.myFavoritesCopy);
   const favfirst = useSelector((state) => state.favoritesFirst);
+  const open = useSelector((state) => state.openMenu);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -52,21 +55,27 @@ const NavBar = ({ setSave, setPost }) => {
 
   return (
     <div className={style.navContainer}>
-      <NavBarTools></NavBarTools>
+      <NavBarTools setSave={setSave}></NavBarTools>
       <div className={style.links}>
         <Link to="/about">About</Link>
         <Link to="/home">Home</Link>
         <Link to="/favorites">Favorites</Link>
       </div>
-      <SearchBar />
-      <div>
-        <button onClick={guardar} className={style.btnSafe}>
-          Guardar cambios
-        </button>
-        <button onClick={logout} className={style.btnLogout}>
-          Cerrar sesion
-        </button>
-      </div>
+      {!open && <SearchBar />}
+      {!open && (
+        <div className={style.divBotones}>
+          <div className={style.btnSave} onClick={guardar}>
+            <img src={save} alt="guardar" />
+          </div>
+
+          {/* <button onClick={logout} className={style.btnLogout}>
+            Cerrar sesion
+          </button> */}
+          <div className={style.divLogout}>
+            <Logout className={style.logout} setSave={setSave}></Logout>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

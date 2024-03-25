@@ -36,17 +36,23 @@ const CloseSave = ({ setSave }) => {
   return (
     <div className={style.cartelContainer}>
       <div className={style.cartel}>
-        {!loading && <p>Desea guardar los cambios antes de cerrar sesion?</p>}
+        {!loading && (
+          <p className={style.safeP}>
+            Desea guardar los cambios antes de cerrar sesion?
+          </p>
+        )}
         {!loading ? (
           <div className={style.botones}>
-            <button onClick={saveClose}>SI</button>
-            <button name="no" onClick={saveClose}>
+            <button className={style.boton} name="no" onClick={saveClose}>
               NO
+            </button>
+            <button className={style.boton} onClick={saveClose}>
+              SI
             </button>
           </div>
         ) : (
           <div className={style.safeAndClose}>
-            <h3>Guardando cambios</h3>
+            <p>Guardando cambios</p>
             <div class="spinner-border" role="status"></div>
           </div>
         )}

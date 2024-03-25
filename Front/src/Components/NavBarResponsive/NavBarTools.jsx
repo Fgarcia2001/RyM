@@ -4,7 +4,7 @@ import { setMenu } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 
-const NavBarResponsive = () => {
+const NavBarTools = () => {
   const dispatch = useDispatch();
   const open = useSelector((state) => state.openMenu);
   const menu = () => {
@@ -16,16 +16,16 @@ const NavBarResponsive = () => {
       <motion.div
         className={style.line}
         animate={{
-          rotate: open ? 40 : 0,
-
+          rotate: open ? 45 : 0,
+          y: open ? 10 : 0,
           transition: { duration: 0.3 },
         }}
       ></motion.div>
       <motion.div
         className={style.line}
         animate={{
-          rotate: open ? -40 : 0,
-
+          rotate: open ? -45 : 0,
+          y: open ? -10 : 0,
           transition: { duration: 0.3 },
         }}
       ></motion.div>
@@ -33,4 +33,4 @@ const NavBarResponsive = () => {
   );
 };
 
-export default NavBarResponsive;
+export default NavBarTools;

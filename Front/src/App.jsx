@@ -40,11 +40,9 @@ function App() {
         <Route path="/favorites" element={<Favorites />}></Route>
         <Route path="/about" element={<About />}></Route>
       </Routes>
-      {open && (
-        <AnimatePresence>
-          <NavBarLinks />
-        </AnimatePresence>
-      )}
+      <AnimatePresence>
+        {open && <NavBarLinks setSave={setSave} />}
+      </AnimatePresence>
       {save && <CloseSave setSave={setSave}></CloseSave>}
       {post && (
         <AnimatePresence>
