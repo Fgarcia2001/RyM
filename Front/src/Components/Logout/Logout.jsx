@@ -17,13 +17,15 @@ const Logout = ({ setSave }) => {
   const logout = () => {
     const close = verificar(favIdFirst, favId);
     if (!close) {
+      setSave(true);
       if (open) {
         dispatch(setMenu());
       }
-      setSave(true);
     } else {
       localStorage.removeItem("token");
-      dispatch(setMenu());
+      if (open) {
+        dispatch(setMenu());
+      }
       dispatch(setValidate());
       dispatch(setValidateGetFav(false));
       navigate("/");

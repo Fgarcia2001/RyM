@@ -3,6 +3,7 @@ import style from "./SearchBar.module.css";
 import { useState } from "react";
 import { getCharacterId } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
+import search from "../../assets/search.svg";
 const SearchBar = () => {
   const dispatch = useDispatch();
   const characters = useSelector((state) =>
@@ -50,9 +51,20 @@ const SearchBar = () => {
   return (
     <div className={style.formId}>
       <form onSubmit={handleSubmit}>
-        <div>
-          <input type="number" onChange={handleChange} id="search" />
-          <input type="submit" />
+        <div className={style.searchbar}>
+          <input
+            className={style.inputSearch}
+            type="number"
+            placeholder=" 1-826"
+            onChange={handleChange}
+            id="search"
+          />
+          <div className={style.search}>
+            <button type="submit">
+              <img src={search} alt="search" />
+            </button>
+          </div>
+          {/* <input type="submit" /> */}
           {vacio && <p className={style.p}>Ingrese un numero</p>}
         </div>
         {find ? (
