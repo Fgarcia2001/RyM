@@ -41,7 +41,14 @@ const Logout = ({ setSave }) => {
   };
   return (
     <div className={style.logout} onClick={logout}>
-      {open ? "Cerrar sesión" : <img src={cerrar} alt="logout"></img>}
+      {open ? (
+        <div className={style.logoutNav}>
+          <span>Cerrar sesión</span>
+          <img src={cerrar} alt="" />
+        </div>
+      ) : (
+        <img src={cerrar} alt="logout"></img>
+      )}
     </div>
   );
 };

@@ -13,6 +13,7 @@ const SearchBar = () => {
   const [find, setFind] = useState(false);
   const [noexist, setNoexist] = useState(false);
   const [vacio, setVacio] = useState(false);
+  const [loading, setLoading] = useState(false);
   const handleChange = (event) => {
     if (event.target.value != "") {
       setState(event.target.value.trim());
@@ -30,7 +31,9 @@ const SearchBar = () => {
     }
     const encontrado = characters.some((char) => char.id == id);
     if (!encontrado) {
+      setLoading(true);
       const response = await dispatch(getCharacterId(id));
+      setLoading(false);
       if (response === "No existe") {
         setNoexist(true);
         setTimeout(() => {
@@ -59,12 +62,19 @@ const SearchBar = () => {
             onChange={handleChange}
             id="search"
           />
+
           <div className={style.search}>
-            <button type="submit">
-              <img src={search} alt="search" />
-            </button>
+            {!loading ? (
+              <button type="submit">
+                <img src={search} alt="search" />
+              </button>
+            ) : (
+              <div>
+                <div class="spinner-border" role="status"></div>
+              </div>
+            )}
           </div>
-          {/* <input type="submit" /> */}
+
           {vacio && <p className={style.p}>Ingrese un numero</p>}
         </div>
         {find ? (

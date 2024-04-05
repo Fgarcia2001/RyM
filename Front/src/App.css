@@ -1,7 +1,10 @@
 .containerApp {
   position: absolute;
   width: 100%;
-  background-color: rgb(255, 255, 255);
+  background-image: url("./assets/fondoInicio.jpg");
+  background-size: cover;
+  background-position: center;
+
   min-height: 100vh;
   display: flex;
   flex-direction: column;

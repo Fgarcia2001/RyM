@@ -1,4 +1,7 @@
 import React from "react";
+import home from "../../assets/house.svg";
+import favorite from "../../assets/heart.svg";
+import person from "../../assets/person.svg";
 import { motion, AnimatePresence } from "framer-motion";
 import style from "./NavBarLinks.module.css";
 import { Link } from "react-router-dom";
@@ -25,13 +28,16 @@ const NavBarLinks = ({ setSave }) => {
       exit="hidden"
     >
       <Link className={style.links} onClick={click} to="/home">
-        Home
+        <span>Home</span>
+        <img src={home} alt="house" />
       </Link>
       <Link className={style.links} onClick={click} to="/favorites">
-        Favoritos
+        <span>Favorites</span>
+        <img src={favorite} alt="fav" />
       </Link>
       <Link className={style.links} onClick={click} to="/about">
-        Sobre mi
+        <span>Sobre mi</span>
+        <img src={person} alt="person" />
       </Link>
 
       <Logout setSave={setSave}></Logout>

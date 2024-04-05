@@ -31,7 +31,7 @@ const getCharacterId = (id) => {
         });
       }
     } catch (error) {
-      console.log(error);
+      alert("Error de servidor");
     }
   };
 };
@@ -121,44 +121,18 @@ const setValidateGetFav = (validate) => {
     });
   };
 };
-/* const postFav = (objeto, token) => {
-  return async (dispatch) => {
-    try {
-      await axios.post(`${URL}/favorites`, objeto, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
-      dispatch({
-        type: SET_FIRSTFAV,
-      });
-      return true;
-    } catch (error) {
-      return false;
-    }
-  };
-}; */
-
 const postFav = (objeto, token) => {
   return async (dispatch) => {
     try {
-      // Simular una demora de 4 segundos
-      await new Promise((resolve) => setTimeout(resolve, 4000));
-
-      // Tu lógica original para hacer la petición POST
       await axios.post(`${URL}/favorites`, objeto, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       });
-
-      // Despachar la acción después de la demora
       dispatch({
         type: SET_FIRSTFAV,
       });
-
       return true;
     } catch (error) {
       return false;

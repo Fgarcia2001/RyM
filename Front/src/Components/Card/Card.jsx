@@ -33,23 +33,25 @@ const Card = ({ id, name, image, char, gender, origin, status, species }) => {
       exit={{ opacity: 0 }}
       className={style.CartaCharacter}
     >
-      <p>{id}</p>
+      {<button onClick={handleFav}>{!fav ? "🤍" : "❤"}</button>}
       {char && (
-        <button
-          type="button"
-          class="btn-close"
-          aria-label="Close"
-          onClick={close}
-        ></button>
+        <div className={style.btnClose}>
+          <button
+            type="button"
+            class="btn-close"
+            aria-label="Close"
+            onClick={close}
+          ></button>
+        </div>
       )}
-      <div className={style.nameButton}>
-        <h2>{name}</h2>
-        {<button onClick={handleFav}>{!fav ? "🤍" : "❤"}</button>}
-      </div>
+
+      <h2>{name}</h2>
+
       <img src={image} alt="character" className={style.imagenChar} />
-      <Link to={`/detail/${id}`}>
-        <p>Ver detalle</p>
+      <Link className={style.verMas} to={`/detail/${id}`}>
+        Ver más
       </Link>
+      <p>{id}</p>
     </motion.div>
   );
 };

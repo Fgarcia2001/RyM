@@ -16,18 +16,25 @@
 }
 .searchbar {
   display: flex;
+  height: 40px;
 }
+
 .search {
   border-radius: 0 15px 15px 0;
   display: flex;
   padding-left: 3px;
   align-items: center;
-  width: 30px;
+  width: 40px;
+
+  border: 1px solid black;
+  border-left: none;
   background-color: white;
 }
 .inputSearch {
   width: 150px;
   border-radius: 15px 0 0 15px;
+  border: 1px solid black;
+  border-right: none;
 }
 @media (max-width: 850px) {
   .formId {

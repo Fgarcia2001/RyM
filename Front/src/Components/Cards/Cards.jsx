@@ -10,7 +10,7 @@ const Cards = () => {
   return (
     <div className={style.cardsContainer}>
       {characters.length === 0 && (
-        <div>Busque personajes en la barra de busqueda </div>
+        <p>Busque personajes en la barra de busqueda</p>
       )}
       {characters && (
         <AnimatePresence>

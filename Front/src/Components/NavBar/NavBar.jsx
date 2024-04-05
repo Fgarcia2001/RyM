@@ -57,9 +57,15 @@ const NavBar = ({ setSave, setPost }) => {
     <div className={style.navContainer}>
       <NavBarTools setSave={setSave}></NavBarTools>
       <div className={style.links}>
-        <Link to="/about">About</Link>
-        <Link to="/home">Home</Link>
-        <Link to="/favorites">Favorites</Link>
+        <Link className={style.link} to="/about">
+          Sobre mi
+        </Link>
+        <Link className={style.link} to="/home">
+          Home
+        </Link>
+        <Link className={style.link} to="/favorites">
+          Favoritos
+        </Link>
       </div>
       {!open && <SearchBar />}
       {!open && (
