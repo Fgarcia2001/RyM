@@ -36,7 +36,7 @@ const NavBarLinks = ({ setSave }) => {
         <img src={favorite} alt="fav" />
       </Link>
       <Link className={style.links} onClick={click} to="/about">
-        <span>Sobre mi</span>
+        <span>Información</span>
         <img src={person} alt="person" />
       </Link>
 

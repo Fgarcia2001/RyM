@@ -58,7 +58,7 @@ const NavBar = ({ setSave, setPost }) => {
       <NavBarTools setSave={setSave}></NavBarTools>
       <div className={style.links}>
         <Link className={style.link} to="/about">
-          Sobre mi
+          Info
         </Link>
         <Link className={style.link} to="/home">
           Home

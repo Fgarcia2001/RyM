@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import style from "./SearchBar.module.css";
+import { motion } from "framer-motion";
+import alerta from "../../assets/exclamation-circle.svg";
 import { useState } from "react";
 import { getCharacterId } from "../../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +16,7 @@ const SearchBar = () => {
   const [noexist, setNoexist] = useState(false);
   const [vacio, setVacio] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
   const handleChange = (event) => {
     if (event.target.value != "") {
       setState(event.target.value.trim());
@@ -50,10 +53,23 @@ const SearchBar = () => {
     document.getElementById("search").value = "";
     setState("");
   };
-  useEffect(() => {}, [characters]);
+  useEffect(() => {
+    setIsAnimating(characters.length === 0);
+  }, [characters]);
   return (
     <div className={style.formId}>
-      <form onSubmit={handleSubmit}>
+      <motion.form
+        className={characters.length === 0 ? style.form : null}
+        animate={{
+          scale: characters.length === 0 ? [1, 1.1, 1] : 1,
+          transition: characters.length === 0 && {
+            duration: 1,
+            repeat: Infinity,
+            repeatType: "reverse",
+          },
+        }}
+        onSubmit={handleSubmit}
+      >
         <div className={style.searchbar}>
           <input
             className={style.inputSearch}
@@ -74,20 +90,26 @@ const SearchBar = () => {
               </div>
             )}
           </div>
-
-          {vacio && <p className={style.p}>Ingrese un numero</p>}
         </div>
-        {find ? (
-          <div className={style.mensajeAlerta}>
-            <p>Repetido</p>
-          </div>
-        ) : null}
-        {noexist ? (
-          <div>
-            <p>No existe el personaje</p>
-          </div>
-        ) : null}
-      </form>
+      </motion.form>
+      {find ? (
+        <div className={style.cartelAlerta}>
+          <img src={alerta} alt="icono" />
+          <p>Repetido</p>
+        </div>
+      ) : null}
+      {noexist ? (
+        <div className={style.cartelAlerta}>
+          <img src={alerta} alt="icono" />
+          <p>No existe el personaje</p>
+        </div>
+      ) : null}
+      {vacio && (
+        <div className={style.cartelAlerta}>
+          <img src={alerta} alt="icono" />
+          <p>Ingrese un número</p>
+        </div>
+      )}
     </div>
   );
 };

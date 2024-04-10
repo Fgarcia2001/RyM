@@ -1,7 +1,7 @@
 .containerApp {
   position: absolute;
   width: 100%;
-  background-image: url("./assets/fondoInicio.jpg");
+  background-image: url("./assets/fondoApp.jpg");
   background-size: cover;
   background-position: center;
 
