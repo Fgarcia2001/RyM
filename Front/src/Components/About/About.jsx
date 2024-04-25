@@ -15,11 +15,12 @@ const About = () => {
               Morty. Una vez que se registró en la app usted podrá buscar hasta
               826 personajes de la serie y agregar los que mas te gusten a la
               sección de favoritos con solo clickear el corazón. En el menu
-              puede ir a favoritos para visualizarlos a todos. No olvides
-              guardar los cambios antes de cerrar sesión! <br /> Las tecnologias
-              utilizadas para la creación: React, Redux, Javascript, Node,
-              Express, Sequelize, postgreSQL, JWT, Bootstrap, Next UI, Framer
-              Motion.
+              puede ir a favoritos para visualizarlos a todos. Ademas esta la
+              opción de poder ordenarlos por numero de ID y poder filtrarlos por
+              géneros. No olvides guardar los cambios antes de cerrar sesión!{" "}
+              <br /> Las tecnologias utilizadas para la creación: React, Redux,
+              Javascript, Node, Express, Sequelize, postgreSQL, JWT, Bootstrap,
+              Next UI, Framer Motion.
             </p>
           </div>
           <div className={style.creaSection}>
@@ -38,7 +39,8 @@ const About = () => {
               <p>
                 -Desarrollador Fullstack <br />
                 -Edad: 22 <br />
-                -País: Argentina
+                -País: Argentina <br />
+                -Ciudad: Rosario <br />
               </p>
             </div>
           </div>

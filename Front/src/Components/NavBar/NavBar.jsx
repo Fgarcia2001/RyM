@@ -74,9 +74,6 @@ const NavBar = ({ setSave, setPost }) => {
             <img src={save} alt="guardar" />
           </div>
 
-          {/* <button onClick={logout} className={style.btnLogout}>
-            Cerrar sesion
-          </button> */}
           <div className={style.divLogout}>
             <Logout className={style.logout} setSave={setSave}></Logout>
           </div>

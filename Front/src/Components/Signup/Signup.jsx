@@ -52,7 +52,10 @@ const Signup = (props) => {
     setLoading(false);
     if (response === "Creado") {
       props.state(!props.state);
-      alert("Usuario creado");
+      props.creado(true);
+      setTimeout(() => {
+        props.creado(false);
+      }, 3000);
       return;
     }
 

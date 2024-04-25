@@ -36,8 +36,9 @@
   width: 15em;
 }
 .divBotones {
-  height: 100%;
-
+  height: 60%;
+  background-color: white;
+  border-radius: 10px;
   display: flex;
   justify-content: center;
   gap: 3rem;

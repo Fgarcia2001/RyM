@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import style from "./Landing.module.css";
+import gifCreado from "../../assets/userCreadogif.gif";
 import logo from "../../assets/Rick_and_Morty_logo.webp";
 import Login from "../../Components/Login/Login";
 import Signup from "../../Components/Signup/Signup";
@@ -8,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 const Landing = () => {
   const [isSignUp, setIsSignUp] = useState(false);
+  const [creado, setCreado] = useState(false);
   const valid = useSelector((state) => state.validate);
   const navigate = useNavigate();
   const animacion = {
@@ -24,6 +26,7 @@ const Landing = () => {
   }, []);
   return (
     <div className={style.landing}>
+      {!creado && <div className={style.divGif}></div>}
       <div className={style.containerForm}>
         <div className={style.logo}>
           <motion.img animate={animacion} src={logo} alt="logo" />
@@ -31,7 +34,7 @@ const Landing = () => {
         {!isSignUp ? (
           <Login state={setIsSignUp} />
         ) : (
-          <Signup state={setIsSignUp} />
+          <Signup state={setIsSignUp} creado={setCreado} />
         )}
       </div>
     </div>

@@ -8,7 +8,17 @@
   border: 2px solid rgba(255, 255, 255, 0.669);
   background-color: rgba(255, 255, 255, 0.076);
 }
-
+.divGif {
+  position: absolute;
+  top: 0;
+  border-radius: 10px;
+  z-index: 99;
+  width: 100px;
+  height: 100px;
+  background-image: url("../../assets/userCreadogif.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 @media (max-width: 600px) {
   .containerForm {
     height: 100%;
