@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import style from "./Landing.module.css";
-import gifCreado from "../../assets/userCreadogif.gif";
+
 import logo from "../../assets/Rick_and_Morty_logo.webp";
 import Login from "../../Components/Login/Login";
 import Signup from "../../Components/Signup/Signup";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 const Landing = () => {
@@ -26,7 +26,17 @@ const Landing = () => {
   }, []);
   return (
     <div className={style.landing}>
-      {!creado && <div className={style.divGif}></div>}
+      <AnimatePresence>
+        {creado && (
+          <motion.div
+            className={style.divGif}
+            initial={{ y: -1000, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          ></motion.div>
+        )}
+      </AnimatePresence>
       <div className={style.containerForm}>
         <div className={style.logo}>
           <motion.img animate={animacion} src={logo} alt="logo" />
